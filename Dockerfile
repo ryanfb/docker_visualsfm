@@ -16,3 +16,8 @@ RUN cd vsfm; make
 ADD http://wwwx.cs.unc.edu/~ccwu/cgi-bin/siftgpu.cgi /root/SiftGPU.zip
 RUN unzip SiftGPU.zip
 RUN cd SiftGPU; make; cp bin/libsiftgpu.so ../vsfm/bin
+
+# Install PBA
+ADD http://grail.cs.washington.edu/projects/mcba/pba_v1.0.5.zip /root/pba.zip
+RUN unzip pba.zip
+RUN cd pba; make; cp bin/libpba.so ../vsfm/bin
