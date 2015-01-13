@@ -7,6 +7,10 @@ An experimental Dockerfile for building [VisualSFM](http://ccwu.me/vsfm/) and it
 * Tag the build with `docker build -t visualsfm .`
 * Run the build with `docker run -t -i visualsfm /bin/bash`
 
+Docker Hub: [ryanfb/visualsfm](https://registry.hub.docker.com/u/ryanfb/visualsfm/)
+
+Blog post: [Docker for VisualSFM](https://ryanfb.github.io/etc/2015/01/13/docker_for_visualsfm.html)
+
 See also: [Docker on AWS GPU Ubuntu 14.04 / CUDA 6.5](http://tleyden.github.io/blog/2014/10/25/docker-on-aws-gpu-ubuntu-14-dot-04-slash-cuda-6-dot-5/)
 
 Based on: [tleyden5iwx/ubuntu-cuda](https://registry.hub.docker.com/u/tleyden5iwx/ubuntu-cuda/)
