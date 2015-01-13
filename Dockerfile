@@ -3,7 +3,7 @@ MAINTAINER Ryan Baumann <ryan.baumann@gmail.com>
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install -y libgtk2.0-dev glew-utils libglew-dev libmetis-dev libscotchparmetis-dev libdevil-dev libboost-all-dev libatlas-cpp-0.6-dev libatlas-dev imagemagick libatlas3gf-base libcminpack-dev libgfortran3 freeglut3-dev libgsl0-dev liblapack-dev unzip youtube-dl libav-tools
+RUN apt-get install -y libgtk2.0-dev glew-utils libglew-dev libmetis-dev libscotchparmetis-dev libdevil-dev libboost-all-dev libatlas-cpp-0.6-dev libatlas-dev imagemagick libatlas3gf-base libcminpack-dev libgfortran3 freeglut3-dev libgsl0-dev liblapack-dev unzip youtube-dl libav-tools dos2unix
 
 WORKDIR /root
 
@@ -16,7 +16,7 @@ RUN cd vsfm; make
 ADD http://wwwx.cs.unc.edu/~ccwu/cgi-bin/siftgpu.cgi /root/SiftGPU.zip
 RUN unzip SiftGPU.zip
 ADD siftgpu.patch /root/SiftGPU/siftgpu.patch
-RUN cd SiftGPU; patch -p0 < siftgpu.patch
+RUN cd SiftGPU; dos2unix makefile; patch -p0 < siftgpu.patch
 RUN cd SiftGPU; make; cp bin/libsiftgpu.so ../vsfm/bin
 
 # Install PBA
