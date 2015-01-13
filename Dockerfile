@@ -3,7 +3,7 @@ MAINTAINER Ryan Baumann <ryan.baumann@gmail.com>
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install -y libgtk2.0-dev glew-utils libglew-dev libmetis-dev libscotchparmetis-dev libdevil-dev libboost-all-dev libatlas-cpp-0.6-dev libatlas-dev imagemagick libatlas3gf-base libcminpack-dev libgfortran3 freeglut3-dev libgsl0-dev liblapack-dev unzip
+RUN apt-get install -y libgtk2.0-dev glew-utils libglew-dev libmetis-dev libscotchparmetis-dev libdevil-dev libboost-all-dev libatlas-cpp-0.6-dev libatlas-dev imagemagick libatlas3gf-base libcminpack-dev libgfortran3 freeglut3-dev libgsl0-dev liblapack-dev unzip youtube-dl libav-tools
 
 WORKDIR /root
 
@@ -41,3 +41,12 @@ ADD cmvs.patch /root/cmvs/cmvs.patch
 RUN cd cmvs; patch -p1 < cmvs.patch
 RUN cp -v ~/pmvs-2/program/main/mylapack.o ~/cmvs/program/main
 RUN cd cmvs/program/main; make; cp -v cmvs pmvs2 genOption ~/vsfm/bin
+
+# Install vlfeat
+ADD http://www.vlfeat.org/download/vlfeat-0.9.19-bin.tar.gz /root/vlfeat-0.9.19-bin.tar.gz
+RUN tar xzf vlfeat-0.9.19-bin.tar.gz
+RUN cp -v vlfeat-0.9.19/bin/glnxa64/* vsfm/bin/
+ADD nv.ini /root/vsfm/bin/nv.ini
+
+ENV PATH $PATH:/root/vsfm/bin
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/root/vsfm/bin
