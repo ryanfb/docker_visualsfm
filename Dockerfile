@@ -15,6 +15,8 @@ RUN cd vsfm; make
 # Install SiftGPU
 ADD http://wwwx.cs.unc.edu/~ccwu/cgi-bin/siftgpu.cgi /root/SiftGPU.zip
 RUN unzip SiftGPU.zip
+ADD siftgpu.patch /root/SiftGPU/siftgpu.patch
+RUN cd SiftGPU; patch -p0 < siftgpu.patch
 RUN cd SiftGPU; make; cp bin/libsiftgpu.so ../vsfm/bin
 
 # Install PBA
@@ -49,4 +51,4 @@ RUN cp -v vlfeat-0.9.19/bin/glnxa64/* vsfm/bin/
 ADD nv.ini /root/vsfm/bin/nv.ini
 
 ENV PATH $PATH:/root/vsfm/bin
-ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/root/vsfm/bin
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/root/vsfm/bin:/usr/local/cuda/lib64
