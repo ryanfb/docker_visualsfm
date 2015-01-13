@@ -26,7 +26,7 @@ RUN cd pba; make; cp bin/libpba.so ../vsfm/bin
 # ADD http://www.di.ens.fr/pmvs/pmvs-2-fix0.tar.gz /root/pmvs-2.tar.gz
 ADD http://www.di.ens.fr/pmvs/pmvs-2.tar.gz /root/pmvs-2.tar.gz
 RUN tar xzf pmvs-2.tar.gz
-RUN cd pmvs-2/program/main/; cp mylapack.o mylapack.o.backup; make clean; cp mylapack.o.backup mylapack.o; make depend; make; cp -v pmvs2 /root/vsfm/bin
+RUN cd pmvs-2/program/main/; cp mylapack.o mylapack.o.backup; make clean; cp mylapack.o.backup mylapack.o; make depend; make
 
 # Install Graclus
 ADD http://www.cs.utexas.edu/users/dml/Software/graclus1.2.tar.gz /root/graclus1.2.tar.gz
@@ -35,5 +35,9 @@ ADD graclus.patch /root/graclus1.2/graclus.patch
 RUN cd graclus1.2; patch -p0 < graclus.patch; make
 
 # Install cmvs
-# ADD http://www.di.ens.fr/cmvs/cmvs-fix2.tar.gz /root/cmvs.tar.gz
-
+ADD http://www.di.ens.fr/cmvs/cmvs-fix2.tar.gz /root/cmvs.tar.gz
+RUN tar xzf cmvs.tar.gz
+ADD cmvs.patch /root/cmvs/cmvs.patch
+RUN cd cmvs; patch -p1 < cmvs.patch
+RUN cp -v ~/pmvs-2/program/main/mylapack.o ~/cmvs/program/main
+RUN cd cmvs/program/main; make; cp -v cmvs pmvs2 genOption ~/vsfm/bin
