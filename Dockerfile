@@ -15,7 +15,7 @@ RUN cd vsfm; make
 # Install PBA
 ADD http://grail.cs.washington.edu/projects/mcba/pba_v1.0.5.zip /root/pba.zip
 RUN unzip pba.zip
-RUN cd pba; make; cp bin/libpba.so ../vsfm/bin
+RUN cd pba; make -f makefile_no_gpu; cp -v bin/libpba_no_gpu.so ../vsfm/bin/libpba.so
 
 # Install pmvs2
 # ADD http://www.di.ens.fr/pmvs/pmvs-2-fix0.tar.gz /root/pmvs-2.tar.gz
