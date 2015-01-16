@@ -15,6 +15,8 @@ RUN cd vsfm; make
 # Install PBA
 ADD http://grail.cs.washington.edu/projects/mcba/pba_v1.0.5.zip /root/pba.zip
 RUN unzip pba.zip
+ADD pba.patch /root/pba/pba.patch
+RUN cd pba; dos2unix makefile_no_gpu; patch -p1 < pba.patch
 RUN cd pba; make -f makefile_no_gpu; cp -v bin/libpba_no_gpu.so ../vsfm/bin/libpba.so
 
 # Install pmvs2
